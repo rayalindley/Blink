@@ -18,7 +18,6 @@ public class SignUpController {
     public TextField pass;
     public Button register;
     public VBox paneSignUp;
-    MySQLConnection mySQLConnection;
 
 
     public void register(ActionEvent actionEvent) throws IOException {
@@ -28,13 +27,14 @@ public class SignUpController {
         String username = uname.getText();
         String password = pass.getText();
 
-        MySQLConnection.createTable();
-        MySQLConnection.insertData(firstname, lastname, email, username, password);
+        if(!firstname.isEmpty() && !lastname.isEmpty() && !email.isEmpty() && !username.isEmpty() && !password.isEmpty()) {
+            UserTbl.createTable();
+            UserTbl.insertData(firstname, lastname, email, username, password);
 
-
-        AnchorPane p = (AnchorPane) paneSignUp.getParent();
-        Parent scene =  FXMLLoader.load(getClass().getResource("signin-view.fxml"));
-        p.getChildren().clear();
-        p.getChildren().add(scene);
+            AnchorPane p = (AnchorPane) paneSignUp.getParent();
+            Parent scene =  FXMLLoader.load(getClass().getResource("signin-view.fxml"));
+            p.getChildren().clear();
+            p.getChildren().add(scene);
+        }
     }
 }

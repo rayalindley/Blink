@@ -25,37 +25,5 @@ public class MySQLConnection {
         getConnection();
     }
 
-    public static void createTable() {
-        try(Connection c = MySQLConnection.getConnection();
-            Statement statement = c.createStatement()) {
-            String query = "CREATE TABLE IF NOT EXISTS users (" +
-                    "id INT AUTO_INCREMENT PRIMARY KEY," +
-                    "firstname VARCHAR(50) NOT NULL," +
-                    "lastname VARCHAR(50) NOT NULL," +
-                    "email VARCHAR(50) NOT NULL," +
-                    "username VARCHAR(50) NOT NULL," +
-                    "password VARCHAR(50) NOT NULL)";
-            statement.execute(query);
-            System.out.println("Table created successfully!");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
-    public static void insertData(String fname, String lname, String email, String uname, String pass) {
-        try(Connection c = MySQLConnection.getConnection();
-            PreparedStatement statement = c.prepareStatement(
-                    "INSERT INTO users (firstname, lastname, email, username, password) VALUES (?, ?, ?, ?, ?)"
-            )) {
-            statement.setString(1, fname);
-            statement.setString(2, lname);
-            statement.setString(3, email);
-            statement.setString(4, uname);
-            statement.setString(5, pass);
-            int rows = statement.executeUpdate();
-            System.out.println("Rows inserted: " + rows);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 }
