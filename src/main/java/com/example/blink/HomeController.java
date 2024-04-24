@@ -17,6 +17,7 @@ public class HomeController {
     public VBox paneHome;
 
     public void myProfile(ActionEvent actionEvent) throws IOException {
+
         AnchorPane p = (AnchorPane) paneHome.getParent();
         Parent scene = FXMLLoader.load(getClass().getResource("profile-view.fxml"));
         p.getChildren().clear();

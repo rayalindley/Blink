@@ -19,9 +19,8 @@ import java.sql.Statement;
 public class SignInController {
     public TextField username;
     public PasswordField password;
-    public Button signIn;
-    public Button signUp;
     public VBox paneSignIn;
+    public static String currUsername;
 
     @FXML
     public void signIn(ActionEvent actionEvent) {

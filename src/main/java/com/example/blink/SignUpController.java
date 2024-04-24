@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -15,9 +16,16 @@ public class SignUpController {
     public TextField lname;
     public TextField emailadd;
     public TextField uname;
-    public TextField pass;
     public Button register;
     public VBox paneSignUp;
+    public PasswordField pass;
+
+    private void toLogInPage() throws IOException {
+        AnchorPane p = (AnchorPane) paneSignUp.getParent();
+        Parent scene =  FXMLLoader.load(getClass().getResource("signin-view.fxml"));
+        p.getChildren().clear();
+        p.getChildren().add(scene);
+    }
 
 
     public void register(ActionEvent actionEvent) throws IOException {
@@ -30,11 +38,11 @@ public class SignUpController {
         if(!firstname.isEmpty() && !lastname.isEmpty() && !email.isEmpty() && !username.isEmpty() && !password.isEmpty()) {
             UserTbl.createTable();
             UserTbl.insertData(firstname, lastname, email, username, password);
-
-            AnchorPane p = (AnchorPane) paneSignUp.getParent();
-            Parent scene =  FXMLLoader.load(getClass().getResource("signin-view.fxml"));
-            p.getChildren().clear();
-            p.getChildren().add(scene);
+            toLogInPage();
         }
+    }
+
+    public void signIn(ActionEvent actionEvent) throws IOException {
+        toLogInPage();
     }
 }
