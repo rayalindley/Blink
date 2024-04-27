@@ -22,6 +22,10 @@ public class SignInController {
     public VBox paneSignIn;
     public static String currUsername;
 
+    public static String getCurrUsername() {
+        return currUsername;
+    }
+
     @FXML
     public void signIn(ActionEvent actionEvent) {
         String uname = username.getText();
@@ -37,6 +41,8 @@ public class SignInController {
                     String pword = res.getString("password");
 
                     if(pword.equals(pass)) {
+                        currUsername = uname;
+
                         AnchorPane p = (AnchorPane) paneSignIn.getParent();
                         Parent scene =  FXMLLoader.load(getClass().getResource("home-view.fxml"));
                         p.getChildren().clear();

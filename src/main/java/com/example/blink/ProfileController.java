@@ -15,16 +15,20 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 
 public class ProfileController {
-    public Label editableLabel;
-    public TextField editableTextField;
     public Button btnEdit;
     public GridPane profileGrid;
     public Button btnSave;
     public Button btnBack;
     public Button btnLogOut;
     public VBox paneProfile;
+    public TextField fname;
+    public TextField lname;
+    public TextField email;
+    public TextField uname;
 
-
+    public void displayProfile(String currUname) {
+        UserTbl.readData(SignInController.currUsername, fname, lname, email, uname);
+    }
 
     private void toPage(String fxmlfile) throws IOException {
         AnchorPane p = (AnchorPane) paneProfile.getParent();
@@ -53,7 +57,13 @@ public class ProfileController {
             }
         });
 
+        String firstname = fname.getText();
+        String lastname = lname.getText();
+        String emailAdd = email.getText();
+        String username = uname.getText();
 
+        UserTbl.updateData(SignInController.currUsername, firstname, lastname, emailAdd, username);
+        SignInController.currUsername = username;
 
         btnEdit.setVisible(true);
         btnSave.setVisible(false);

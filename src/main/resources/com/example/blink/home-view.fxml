@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
 <AnchorPane prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.blink.HomeController">
    <children>
        <ImageView fitHeight="591.0" fitWidth="500.0" layoutY="-91.0" pickOnBounds="true">
@@ -16,9 +16,15 @@
          <children>
             <ToolBar prefHeight="40.0" prefWidth="500.0">
               <items>
-                <Button fx:id="btnProfile" mnemonicParsing="false" onAction="#myProfile" text="Profile" />
+                <Button fx:id="btnProfile" mnemonicParsing="false" onAction="#myProfile" style="-fx-background-color: PINK;" text="Profile">
+                     <effect>
+                        <DropShadow height="3.0" radius="1.0" width="3.0" />
+                     </effect></Button>
                   <Separator prefWidth="369.0" />
-                  <Button fx:id="btnLogOut" mnemonicParsing="false" onAction="#logOut" text="Log Out" />
+                  <Button fx:id="btnLogOut" mnemonicParsing="false" onAction="#logOut" style="-fx-background-color: PINK;" text="Log Out">
+                     <effect>
+                        <DropShadow height="3.0" radius="1.0" width="3.0" />
+                     </effect></Button>
               </items>
             </ToolBar>
             <GridPane alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT">
@@ -32,12 +38,21 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button mnemonicParsing="false" text="+" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label text="To Do" />
-                  <Label text="In Progress" GridPane.columnIndex="1" />
-                  <Label text="Done" textAlignment="CENTER" GridPane.columnIndex="2" />
-                  <Button mnemonicParsing="false" text="+" GridPane.rowIndex="1" />
-                  <Button mnemonicParsing="false" text="+" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#addInProgress" style="-fx-background-color: PINK;" text="+" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                     <effect>
+                        <DropShadow height="3.0" radius="1.0" width="3.0" />
+                     </effect></Button>
+                  <Label text="To Do" GridPane.halignment="CENTER" />
+                  <Label text="In Progress" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                  <Label text="Done" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addToDo" style="-fx-background-color: PINK;" text="+" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                     <effect>
+                        <DropShadow height="3.0" radius="1.0" width="3.0" />
+                     </effect></Button>
+                  <Button mnemonicParsing="false" onAction="#addDone" style="-fx-background-color: PINK;" text="+" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                     <effect>
+                        <DropShadow height="3.0" radius="1.0" width="3.0" />
+                     </effect></Button>
                </children>
             </GridPane>
             <GridPane>

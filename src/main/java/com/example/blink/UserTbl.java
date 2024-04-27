@@ -1,5 +1,8 @@
 package com.example.blink;
 
+import javafx.scene.control.TextField;
+import org.w3c.dom.Text;
+
 import java.sql.*;
 
 public class UserTbl {
@@ -37,37 +40,40 @@ public class UserTbl {
         }
     }
 
-    public static void readData(String[] args) {
+    public static void readData(String currUname, TextField fname, TextField lname, TextField email, TextField uname) {
         try(Connection c = MySQLConnection.getConnection();
             Statement statement = c.createStatement()) {
-            String query = "SELECT * FROM users WHERE username=?";
+            String query = "SELECT * FROM users WHERE username='"+currUname+"'";
             ResultSet res = statement.executeQuery(query);
 
             while(res.next()) {
-                int id = res.getInt("id");
-                String name = res.getString("name");
-                String email = res.getString("email");
-                System.out.println("ID: " + id);
-                System.out.println("Name: " + name);
-                System.out.println("Email Address: " + email);
+                String firstname = res.getString("firstname");
+                String lastname = res.getString("lastname");
+                String emailAdd = res.getString("email");
+                String username = res.getString("username");
+
+                fname.setText(firstname);
+                lname.setText(lastname);
+                email.setText(emailAdd);
+                uname.setText(username);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public static void updateData(String[] args) {
+    public static void updateData(String currUname, String fname, String lname, String email, String uname) {
         try(Connection c = MySQLConnection.getConnection();
             PreparedStatement statement = c.prepareStatement(
-                    "UPDATE users SET name=? WHERE id=?"
-                    //"UPDATE users SET id=? WHERE name=?"
-                    //"UPDATE users SET email=? WHERE name=?"
+                    "UPDATE users SET firstname=?, lastname=?, email=?, username=? WHERE username=?"
             )) {
-            String name = "Raya Lindley Dela Victoria Jaranilla";
-            int id = 2;
 
-            statement.setString(1, name);
-            statement.setInt(2, id);
+            statement.setString(1, fname);
+            statement.setString(2, lname);
+            statement.setString(3, email);
+            statement.setString(4, uname);
+            statement.setString(5, currUname);
+
             int rows = statement.executeUpdate();
             System.out.println("Rows updated: " + rows);
         } catch (SQLException e) {
